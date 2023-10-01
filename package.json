@@ -18,6 +18,7 @@
     "react-dom": "latest"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.10",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
@@ -26,6 +27,7 @@
     "eslint-config-next": "latest",
     "postcss": "latest",
     "tailwindcss": "latest",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "latest"
   }
 }
