@@ -4,26 +4,27 @@ import RenderTag from "../shared/RenderTag";
 import Metric from "../shared/Metric";
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
 import { SignedIn } from "@clerk/nextjs";
-// import EditDeleteAction from "../shared/EditDeleteAction";
+import EditDeleteAction from "../shared/EditDeleteAction";
 
-interface QuestionProps {
-  _id: string;
-  title: string;
-  tags: {
-    _id: string;
-    name: string;
-  }[];
-  author: {
-    _id: string;
-    name: string;
-    picture: string;
-  };
-  upvotes: string[];
-  views: number;
-  answers: Array<object>;
-  createdAt: Date;
-  clerkId?: string;
-}
+// interface QuestionProps {
+//   _id: string;
+//   title: string;
+//   tags: {
+//     _id: string | any;
+//     name: string;
+//   }[];
+//   author: {
+//     clerkId: string;
+//     _id: string;
+//     name: string;
+//     picture: string;
+//   };
+//   upvotes: string[];
+//   views: number;
+//   answers: Array<object>;
+//   createdAt: Date;
+//   clerkId?: string | undefined;
+// }
 
 const QuestionCard = ({
   clerkId,
@@ -35,15 +36,15 @@ const QuestionCard = ({
   views,
   answers,
   createdAt,
-}: QuestionProps) => {
-  // const showActionButtons = clerkId && clerkId === author.clerkId;
+}: any) => {
+  const showActionButtons = clerkId && clerkId === author.clerkId;
 
   return (
     <div className="card-wrapper rounded-[10px] p-9 sm:px-11">
       <div className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row">
         <div>
           <span className="subtle-regular text-dark400_light700 line-clamp-1 flex sm:hidden">
-            {/* {getTimestamp(createdAt)} */}
+            {getTimestamp(createdAt)}
           </span>
           <Link href={`/question/${_id}`}>
             <h3 className="sm:h3-semibold base-semibold text-dark200_light900 line-clamp-1 flex-1">
@@ -53,14 +54,14 @@ const QuestionCard = ({
         </div>
 
         <SignedIn>
-          {/* {showActionButtons &&
-            // <EditDeleteAction type="Question" itemId={JSON.stringify(_id)} />
-            } */}
+          {showActionButtons && (
+            <EditDeleteAction type="Question" itemId={JSON.stringify(_id)} />
+          )}
         </SignedIn>
       </div>
 
       <div className="mt-3.5 flex flex-wrap gap-2">
-        {tags.map((tag) => (
+        {tags.map((tag: any) => (
           <RenderTag key={tag._id} _id={tag._id} name={tag.name} />
         ))}
       </div>

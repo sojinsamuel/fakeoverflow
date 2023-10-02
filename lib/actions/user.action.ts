@@ -16,7 +16,7 @@ import {
 import { revalidatePath } from "next/cache";
 import Question from "@/database/question.model";
 import Tag from "@/database/tag.model";
-// import Answer from "@/database/answer.model";
+import Answer from "@/database/answer.model";
 
 export async function getUserById(params: any) {
   try {
@@ -259,12 +259,12 @@ export async function getUserInfo(params: GetUserByIdParams) {
     }
 
     const totalQuestions = await Question.countDocuments({ author: user._id });
-    // const totalAnswers = await Answer.countDocuments({ author: user._id });
+    const totalAnswers = await Answer.countDocuments({ author: user._id });
 
     return {
       user,
       totalQuestions,
-      //   totalAnswers,
+      totalAnswers,
     };
   } catch (error) {
     console.log(error);
@@ -302,22 +302,22 @@ export async function getUserAnswers(params: GetUserStatsParams) {
   try {
     connectToDatabase();
 
-    // const { userId, page = 1, pageSize = 10 } = params;
+    const { userId, page = 1, pageSize = 10 } = params;
 
-    // const skipAmount = (page - 1) * pageSize;
+    const skipAmount = (page - 1) * pageSize;
 
-    // const totalAnswers = await Answer.countDocuments({ author: userId });
+    const totalAnswers = await Answer.countDocuments({ author: userId });
 
-    // const userAnswers = await Answer.find({ author: userId })
-    //   .sort({ upvotes: -1 })
-    //   .skip(skipAmount)
-    //   .limit(pageSize)
-    //   .populate("question", "_id title")
-    //   .populate("author", "_id clerkId name picture");
+    const userAnswers = await Answer.find({ author: userId })
+      .sort({ upvotes: -1 })
+      .skip(skipAmount)
+      .limit(pageSize)
+      .populate("question", "_id title")
+      .populate("author", "_id clerkId name picture");
 
-    // const isNextAnswer = totalAnswers > skipAmount + userAnswers.length;
+    const isNextAnswer = totalAnswers > skipAmount + userAnswers.length;
 
-    // return { totalAnswers, answers: userAnswers, isNextAnswer };
+    return { totalAnswers, answers: userAnswers, isNextAnswer };
   } catch (error) {
     console.log(error);
     throw error;

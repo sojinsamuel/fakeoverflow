@@ -13,8 +13,8 @@ import {
 } from "./shared.types";
 import User from "@/database/user.model";
 import { revalidatePath } from "next/cache";
-// import Answer from "@/database/answer.model";
-// import Interaction from "@/database/interaction.model";
+import Answer from "@/database/answer.model";
+import Interaction from "@/database/interaction.model";
 import { FilterQuery } from "mongoose";
 
 export async function getQuestions(params: GetQuestionsParams) {
@@ -207,8 +207,8 @@ export async function deleteQuestion(params: DeleteQuestionParams) {
     const { questionId, path } = params;
 
     await Question.deleteOne({ _id: questionId });
-    // await Answer.deleteMany({ question: questionId });
-    // await Interaction.deleteMany({ question: questionId });
+    await Answer.deleteMany({ question: questionId });
+    await Interaction.deleteMany({ question: questionId });
     await Tag.updateMany(
       { questions: questionId },
       { $pull: { questions: questionId } }

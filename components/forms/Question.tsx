@@ -18,7 +18,7 @@ import { Button } from "../ui/button";
 import { QuestionsSchema } from "@/lib/validations";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
-import { createQuestion } from "@/lib/actions/question.action";
+import { createQuestion, editQuestion } from "@/lib/actions/question.action";
 import { useRouter, usePathname } from "next/navigation";
 import { useTheme } from "@/context/ThemeProvider";
 
@@ -40,7 +40,6 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
 
   const groupedTags = parsedQuestionDetails?.tags.map((tag: any) => tag.name);
 
-  // 1. Define your form.
   const form = useForm<z.infer<typeof QuestionsSchema>>({
     resolver: zodResolver(QuestionsSchema),
     defaultValues: {
@@ -50,19 +49,18 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
     },
   });
 
-  // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof QuestionsSchema>) {
     setIsSubmitting(true);
 
     try {
       if (type === "Edit") {
-        // await editQuestion({
-        //   questionId: parsedQuestionDetails._id,
-        //   title: values.title,
-        //   content: values.explanation,
-        //   path: pathname,
-        // });
-        // router.push(`/question/${parsedQuestionDetails._id}`);
+        await editQuestion({
+          questionId: parsedQuestionDetails._id,
+          title: values.title,
+          content: values.explanation,
+          path: pathname,
+        });
+        router.push(`/question/${parsedQuestionDetails._id}`);
       } else {
         await createQuestion({
           title: values.title,
