@@ -20,7 +20,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Stackoverflow Clone - theFullStack hackathon Project",
+  title: "Fake Overflow - theFullStack hackathon Project",
   description:
     "A Stackoverflow Clone made with Next.js, Clerk, MongoDB, and Openai",
   icons: {
