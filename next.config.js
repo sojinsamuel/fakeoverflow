@@ -2,7 +2,7 @@
 const nextConfig = {
   experimental: {
     serverActions: true,
-    mdxRss: true,
+    mdxRs: true,
     serverComponentsExternalPackages: ["mongoose"],
   },
   images: {
@@ -16,6 +16,9 @@ const nextConfig = {
         hostname: "*",
       },
     ],
+  },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
   },
 };
 

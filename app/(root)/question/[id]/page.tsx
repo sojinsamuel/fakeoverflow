@@ -83,7 +83,7 @@ const Page = async ({ params, searchParams }: any) => {
           textStyles="small-medium text-dark400_light800"
         />
       </div>
-      <div className="w-[48vw]">
+      <div className="text-dark400_light900 w-[48vw]">
         <ParseHTML data={result.content} />
       </div>
 
