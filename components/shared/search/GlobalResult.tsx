@@ -15,7 +15,7 @@ const GlobalResult = () => {
   const [result, setResult] = useState([
     { type: "question", id: 1, title: "Next.js question" },
     { type: "tag", id: 1, title: "Nextjs" },
-    { type: "user", id: 1, title: "jsm" },
+    { type: "user", id: 1, title: "sojin" },
   ]);
 
   const global = searchParams.get("global") || "";
