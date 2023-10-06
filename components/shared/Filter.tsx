@@ -8,8 +8,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-// import { formUrlQuery } from "@/lib/utils";
-import { useSearchParams } from "next/navigation";
+import { formUrlQuery } from "@/lib/utils";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface Props {
   filters: {
@@ -22,17 +22,18 @@ interface Props {
 
 const Filter = ({ filters, otherClasses, containerClasses }: Props) => {
   const searchParams = useSearchParams();
-  // const router = useRouter();
+  const router = useRouter();
 
   const paramFilter = searchParams.get("filter");
 
   const handleUpdateParams = (value: string) => {
-    // const newUrl = formUrlQuery({
-    //   params: searchParams.toString(),
-    //   key: "filter",
-    //   value,
-    // });
-    // router.push(newUrl, { scroll: false });
+    const newUrl = formUrlQuery({
+      params: searchParams.toString(),
+      key: "filter",
+      value,
+    });
+
+    router.push(newUrl, { scroll: false });
   };
 
   return (
@@ -48,10 +49,14 @@ const Filter = ({ filters, otherClasses, containerClasses }: Props) => {
             <SelectValue placeholder="Select a Filter" />
           </div>
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="text-dark500_light700 small-regular border-none bg-light-900 dark:bg-dark-300">
           <SelectGroup>
             {filters.map((item) => (
-              <SelectItem key={item.value} value={item.value}>
+              <SelectItem
+                key={item.value}
+                value={item.value}
+                className="focus:bg-light-800 dark:focus:bg-dark-400"
+              >
                 {item.name}
               </SelectItem>
             ))}
