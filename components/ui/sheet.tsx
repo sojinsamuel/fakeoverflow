@@ -1,6 +1,3 @@
-// eslint-disable-ts @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 "use client";
 
 import * as React from "react";
@@ -16,9 +13,11 @@ const SheetTrigger = SheetPrimitive.Trigger;
 
 const SheetClose = SheetPrimitive.Close;
 const SheetPortal = ({
+  // @ts-expect-error
   className,
   ...props
 }: SheetPrimitive.DialogPortalProps) => (
+  // @ts-expect-error
   <SheetPrimitive.Portal className={cn(className)} {...props} />
 );
 SheetPortal.displayName = SheetPrimitive.Portal.displayName;

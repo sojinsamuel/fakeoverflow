@@ -6,25 +6,25 @@ import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
 import { SignedIn } from "@clerk/nextjs";
 import EditDeleteAction from "../shared/EditDeleteAction";
 
-// interface QuestionProps {
-//   _id: string;
-//   title: string;
-//   tags: {
-//     _id: string;
-//     name: string;
-//   }[];
-//   author: {
-//     _id: string;
-//     name: string;
-//     picture: string;
-//     clerkId: string;
-//   };
-//   upvotes: string[];
-//   views: number;
-//   answers: Array<object>;
-//   createdAt: Date;
-//   clerkId?: string;
-// }
+interface QuestionProps {
+  _id: string;
+  title: string;
+  tags: {
+    _id: string;
+    name: string;
+  }[];
+  author: {
+    _id: string;
+    name: string;
+    picture: string;
+    clerkId: string;
+  };
+  upvotes: string[];
+  views: number;
+  answers: Array<object>;
+  createdAt: Date;
+  clerkId?: string | null;
+}
 
 const QuestionCard = ({
   clerkId,
@@ -36,7 +36,7 @@ const QuestionCard = ({
   views,
   answers,
   createdAt,
-}: any) => {
+}: QuestionProps) => {
   const showActionButtons = clerkId && clerkId === author.clerkId;
 
   return (
